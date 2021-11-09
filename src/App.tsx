@@ -26,6 +26,7 @@ function App() {
         todo: inputText,
       },
     ])
+    setInputText('')
   }
 
   return (
@@ -34,6 +35,7 @@ function App() {
       <input
         type="text"
         name={'todo'}
+        value={inputText}
         onChange={(e) => setInputText(e.target.value)}
       />
       <button type={'button'} onClick={onAdd}>
