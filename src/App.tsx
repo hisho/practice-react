@@ -1,27 +1,30 @@
 import { useState } from 'react'
+import { v4 } from 'uuid'
 
 function App() {
   const [inputText, setInputText] = useState('')
-  const [todoList, setTodoList] = useState([
+  const [todoList, setTodoList] = useState<
     {
-      todo: '文字1',
-    },
-    {
-      todo: '文字2',
-    },
-    {
-      todo: '文字3',
-    },
-    {
-      todo: '文字4',
-    },
-  ])
+      uuid: string
+      todo: string
+    }[]
+  >([])
 
   //削除するメソッド
-  const onDelete = (todo: string) => {
+  const onDelete = (uuid: string) => {
     setTodoList((prevState) => {
-      return prevState.filter((n) => n.todo !== todo)
+      return prevState.filter((n) => n.uuid !== uuid)
     })
+  }
+
+  const onAdd = () => {
+    setTodoList((prevState) => [
+      ...prevState,
+      {
+        uuid: v4(),
+        todo: inputText,
+      },
+    ])
   }
 
   return (
@@ -32,21 +35,16 @@ function App() {
         name={'todo'}
         onChange={(e) => setInputText(e.target.value)}
       />
-      <button
-        onClick={() =>
-          setTodoList((prevState) => [...prevState, { todo: inputText }])
-        }
-      >
+      <button type={'button'} onClick={onAdd}>
         追加
       </button>
-      <p>{inputText}</p>
       <div>
         <ul>
           {todoList.map((item, index) => {
             return (
               <li key={`todo_${index}`}>
                 {item.todo}
-                <button type={'button'} onClick={() => onDelete(item.todo)}>
+                <button type={'button'} onClick={() => onDelete(item.uuid)}>
                   削除
                 </button>
               </li>
