@@ -18,6 +18,7 @@ function App() {
   }
 
   const onAdd = () => {
+    if (inputText.length === 0) return
     setTodoList((prevState) => [
       ...prevState,
       {
