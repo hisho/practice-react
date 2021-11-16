@@ -1,4 +1,5 @@
 import { useTodo } from './useTodo'
+import { TodoInput } from './TodoInput'
 
 function App() {
   const { inputText, onChangeInputText, onAdd, todoList, onDelete } = useTodo()
@@ -6,15 +7,11 @@ function App() {
   return (
     <div style={{ width: '30rem', margin: '0 auto' }}>
       <h1>TODO APP</h1>
-      <input
-        type="text"
-        name={'todo'}
-        value={inputText}
-        onChange={onChangeInputText}
+      <TodoInput
+        inputText={inputText}
+        onChangeInputText={onChangeInputText}
+        onAdd={onAdd}
       />
-      <button type={'button'} onClick={onAdd}>
-        追加
-      </button>
       <div>
         <ul>
           {todoList.map(({ todo, uuid }) => (
