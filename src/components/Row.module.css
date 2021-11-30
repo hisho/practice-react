@@ -1,0 +1,21 @@
+.list {
+	display: flex;
+	gap: 20px;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.item {
+	width: 20%;
+	flex-shrink: 0;
+}
+
+.image {
+	width: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease-out;
+}
+
+.image:hover {
+	transform: scale(1.05);
+}
